@@ -4,9 +4,10 @@ public class Main {
   
   private static final Scanner SCAN = new Scanner(System.in);
   private static final int MATRIZ = 4;
+  private static final boolean[][] matriz = new boolean[MATRIZ][MATRIZ];
+
   
   public static void main(String[] args) {
-    boolean[][] matriz = new boolean[MATRIZ][MATRIZ];
     preencherMatriz(matriz);
     receberCoordenadas(matriz);
     imprimirMatriz(matriz);
