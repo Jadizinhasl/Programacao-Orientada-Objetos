@@ -1,10 +1,13 @@
+package Ex1;
+
 import java.util.*;
 
 public class Main {
     private static final int TOTAL_PERGUNTAS = 4;
-    private static final String[] REPOSTAS = new String[TOTAL_PERGUNTAS];
+    private static final String[] RESPOSTAS = new String[TOTAL_PERGUNTAS];
     private static final String[] GABARITO = new String[TOTAL_PERGUNTAS];
     private static final Scanner SCAN = new Scanner(System.in);
+    private static final int CERTAS = 0;
 
     public static void main(String[] args) {
         String nome = nomeParticipante();
@@ -12,8 +15,8 @@ public class Main {
         primeiraPergunta(nome);
         segundaPergunta(nome);
         terceiraPergunta(nome);
-        quartaPergunta(nome);
         resultado(nome);
+        agradecimento(nome);
     }
 
     public static String nomeParticipante() {
@@ -75,7 +78,7 @@ public class Main {
         } while (!respostaCerta(resposta));
 
         GABARITO[0] = "B";
-        REPOSTAS[0] = resposta;
+        RESPOSTAS[0] = resposta;
     }
 
     public static void segundaPergunta(String nome) {
@@ -97,7 +100,7 @@ public class Main {
         } while (!respostaCerta(resposta));
 
         GABARITO[1] = "A";
-        REPOSTAS[1] = resposta;
+        RESPOSTAS[1] = resposta;
     }
 
     public static void terceiraPergunta(String nome) {
@@ -119,28 +122,7 @@ public class Main {
         } while (!respostaCerta(resposta));
 
         GABARITO[2] = "D";
-        REPOSTAS[2] = resposta;
-    }
-
-    public static void quartaPergunta(String nome) {
-        String resposta = "";
-
-        do {
-            System.out.println(
-                    """
-                    4 - Como Nobara conhece Yuuji Itadori e Megumi Fushiguro?
-
-                    A) - No primeiro dia na escola
-                    B) - Durante uma briga na escola
-                    C) - Durante a primeira missão oficial como Xamã
-                    """
-                );
-            resposta = SCAN.nextLine();
-
-        } while (!respostaCerta(resposta));
-
-        GABARITO[3] = "C";
-        REPOSTAS[3] = resposta;
+        RESPOSTAS[2] = resposta;
     }
 
     public static boolean respostaCerta(String resposta) {
@@ -157,20 +139,54 @@ public class Main {
         return true;
     }
 
-    public static void resultado(String nome){
+    public static void resultado(String nome) {
         System.out.println(String.format(
-            """
-            %s, Vamos ver do que você foi capaz de fazer!!.
-            """,
-            nome
-        ));
+                """
+                 %s, Vamos ver todo o seu potencial.
+                """,
+                nome
+            ));
 
-        for(int i = 0; i < TOTAL_PERGUNTAS; i++){
+        if (RESPOSTAS[0].equalsIgnoreCase(GABARITO[0]) && RESPOSTAS[1].equalsIgnoreCase(GABARITO[1]) && RESPOSTAS[2].equalsIgnoreCase(GABARITO[2])){
             System.out.println(String.format(
-                "%s - %s",
-                (i + 1),
-                REPOSTAS[i].equalsIgnoreCase(GABARITO[i]) ? "ACERTOU"  :  "ERROU"
-            ));  
+                    """
+                    Parabéns %s, você acertou todas!
+                    Você é um verdadeiro otaku.
+                    """, 
+                    nome));
+        }else if (RESPOSTAS[0].equalsIgnoreCase(GABARITO[0]) && RESPOSTAS[1].equalsIgnoreCase(GABARITO[1]) || RESPOSTAS[2].equalsIgnoreCase(GABARITO[2]) && RESPOSTAS[1].equalsIgnoreCase(GABARITO[1]) || RESPOSTAS[0].equalsIgnoreCase(GABARITO[0]) && RESPOSTAS[2].equalsIgnoreCase(GABARITO[2])) {
+            System.out.println(String.format(
+                    """
+                    Parabéns %s, você acertou duas!
+                    Você é até que animeiro(a) hein.
+                    """, 
+                    nome
+                    ));
+        }else if (RESPOSTAS[0].equalsIgnoreCase(GABARITO[0]) == false && RESPOSTAS[1].equalsIgnoreCase(GABARITO[1]) == false && RESPOSTAS[2].equalsIgnoreCase(GABARITO[2]) == false) {
+            System.out.println(String.format(
+                    """
+                    %s, infelizmente você errou todas.
+                    Você tem zero conhecimento do anime!
+                    """, 
+                    nome
+                ));
+        }else{
+            System.out.println(String.format(
+                    """
+                    Parabéns %s, você acertou uma!
+                    Você não sabe quase nada rs.
+                    """, 
+                    nome
+                ));
         }
+    }
+
+    public static void agradecimento(String nome) {
+        System.out.println(String.format(
+                """
+                Obrigada(o) %s por participar deste quiz, espero que tenha curtido bastante!
+                """, 
+                nome
+            ));
     }
 }
