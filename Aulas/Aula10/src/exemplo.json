@@ -1,0 +1,12 @@
+//lista de uma lista de uma lista
+
+"curso":{
+    "disciplina":[
+        "aulas":[
+            "temas":[
+                "atividades:"[
+
+            ]
+        ]
+    ]
+}
